@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { device } from './layout/BreakPoints';
 import Plan from './pages/Plan';
-
-const theme = {
-  black: '#333',
-  creamWhite: '#f4f4f4',
-  darkBlue: '#222831',
-  yellow: '#efbb35',
-  lightGreen: '#00a6a2',
-  blue: '#002f6c',
-  gray: '#737373',
-  white: '#fff',
-  borderRadius: '0.2rem',
-  gapSize: '3rem'
-};
+import { ChallengesContext } from './common/ChallengesContext';
+import ChallengeCategoriesComponent from './components/ChallengeCategoriesComponent';
+import ChallengeLists from './components/ChallengeLists';
+import ChallengeFrequency from './components/ChallengeFrequency';
+import Button from './layout/Button';
+import { theme } from './layout/Theme';
 
 const gap = props => props.theme.gapSize;
 
@@ -90,6 +83,17 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const { data } = useContext(ChallengesContext);
+
+  const hasSelected = [...Object.values({ ...data.list })]
+    .map(({ list }) => {
+      return list.some(el => {
+        return el && el.selected;
+      });
+    })
+    .filter(el => el);
+
+  const handleRoute = () => {};
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -103,7 +107,27 @@ function App() {
         </AppNav>
         <AppWrapper>
           <Switch>
-            <Route exact path='/' />
+            <Route
+              exact
+              path='/'
+              render={props => (
+                <Fragment>
+                  <ChallengeCategoriesComponent />
+                  <ChallengeLists />
+
+                  {hasSelected.length > 0 && (
+                    <Fragment>
+                      <ChallengeFrequency />
+                      {data.duration.length > 0 && (
+                        <Link to='/plan'>
+                          <Button onClick={handleRoute} text={`see plan`} />
+                        </Link>
+                      )}
+                    </Fragment>
+                  )}
+                </Fragment>
+              )}
+            />
             <Route exact path='/plan' component={Plan} />
           </Switch>
         </AppWrapper>
