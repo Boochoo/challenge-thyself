@@ -19,8 +19,8 @@ Users can
 
 # Tasks to implement
 
-## Front page
+### Front page
 
 ---
 
-## Plan Page
+### Plan Page
