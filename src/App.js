@@ -8,8 +8,8 @@ import { ChallengesContext } from './common/ChallengesContext';
 import ChallengeCategoriesComponent from './components/ChallengeCategoriesComponent';
 import ChallengeLists from './components/ChallengeLists';
 import ChallengeFrequency from './components/ChallengeFrequency';
-import Button from './layout/Button';
 import { theme } from './layout/Theme';
+import Button from './layout/Button';
 
 const gap = props => props.theme.gapSize;
 
