@@ -6,26 +6,21 @@ import { theme } from '../layout/Theme';
 
 const CategoryButton = styled.div`
   flex-basis: 17%;
-  width: 0;
   margin: 0.75rem;
-  text-align: center;
-
   padding: 1.5rem 0;
+  width: 0;
   outline: 0;
   border: none;
-  font-family: inherit;
+  text-align: center;
   border-radius: 0.1rem;
   font-weight: 800;
   text-transform: uppercase;
   color: ${theme.white};
+  background-color: ${theme.darkBlue};
   box-shadow: 0 0 0.25rem rgba(23, 34, 23, 2);
   cursor: pointer;
-  background-color: ${theme.darkBlue};
 
-  &.selected {
-    background-color: ${theme.green};
-  }
-
+  &.selected,
   &:hover {
     background-color: ${theme.green};
     transition: all 400ms ease-in-out;

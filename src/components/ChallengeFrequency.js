@@ -31,7 +31,7 @@ const ChallengeFrequency = () => {
     <Fragment>
       <FrequencyContainer>
         <h3>
-          Select how often you want to take part in the selected challenge:{' '}
+          Select how often you want to take part in the selected challenge:
         </h3>
 
         {data.frequency.map((value, i) => (

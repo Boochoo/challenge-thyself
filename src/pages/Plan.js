@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ChallengesContext } from '../common/ChallengesContext';
 import Button from '../layout/Button';
+import { theme } from '../layout/Theme';
+import { device } from '../layout/BreakPoints';
 
 const PlanHeader = styled.header`
   margin-bottom: 1rem;
@@ -10,59 +12,50 @@ const PlanHeader = styled.header`
 `;
 
 const CardWarpper = styled.div`
-  display: flex;
   position: relative;
-  padding: 4rem;
-  margin: 1rem 2rem;
-  /* background: var(--green-bg); */
-  /* border-radius: var(--border-radius); */
-  /* max-width: 450px; */
-
-  transform: translateZ(0);
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  /* box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5); */
-
-  &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 0.75rem;
-    border-radius: 50%;
-    left: 0;
-    bottom: -3rem;
-  }
 `;
 
 const Card = styled.div`
-  padding: 2rem 3rem;
-  transform-style: preserve-3d;
-  /* color: var(--white); */
-
   h3 {
-    color: #212121;
+    color: ${theme.gray};
   }
 
   h2 {
     text-transform: capitalize;
-    color: var(--dark-color);
+    color: ${theme.green};
   }
+`;
 
+const SelectedButton = styled.div`
   button {
-    margin-top: 2rem;
+    padding: 0;
+    border: none;
     background: none;
-    color: var(--bg-color);
-
-    &:hover {
-      background: var(--bg-color);
-      color: var(--white);
-    }
+    box-shadow: none;
+    color: ${theme.green};
+    text-align: left;
+    text-transform: initial;
+    cursor: default;
   }
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${device.tabletSmall} {
+    flex-direction: column;
+  }
+
+  a {
+    flex-basis: 100%;
+  }
+  button {
+    margin-top: 2rem;
+    @media ${device.tabletSmall} {
+      width: 100%;
+    }
+  }
 `;
 
 const Plan = () => {
@@ -83,14 +76,10 @@ const Plan = () => {
 
   const selectedChallenge = selectedCategory
     .map((challenge, i) => challenge.list)
-    .map((el, i) => {
-      const filteredChallenge = el.filter(currentItem => currentItem.selected);
-
-      return filteredChallenge.map((currentItem, inex) => (
-        <Fragment>
-          <Button text={currentItem.type} key={inex} id={inex} />
-        </Fragment>
-      ));
+    .map(item => {
+      return item
+        .filter(currentItem => currentItem.selected)
+        .map(currentItem => currentItem);
     });
 
   const sanitizeString = str =>
@@ -108,16 +97,25 @@ const Plan = () => {
             <h3> Selected plan includes: </h3>
             <h2>{sanitizeString(category)}</h2>
             <h3> Selected challenges are: </h3>
-            {selectedChallenge}
+            <SelectedButton>
+              {selectedChallenge &&
+                [...selectedChallenge].map(currentItem =>
+                  [...currentItem].map((item, i) => (
+                    <Button text={`#${item.type}`} key={i} />
+                  ))
+                )}
+            </SelectedButton>
 
             <h3> Selected duration is: </h3>
             <h2>{data.duration}</h2>
 
             <ButtonsWrapper>
               <Link to='/'>
-                <Button key='asdf' text='edit plan' />
+                <Button text='edit plan' />
               </Link>
-              <Button text='start plan' key='asasaaa' />
+              <Link to='/calendar'>
+                <Button text='start plan' />
+              </Link>
             </ButtonsWrapper>
           </Fragment>
         </Card>

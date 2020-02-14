@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { device } from './layout/BreakPoints';
 import Plan from './pages/Plan';
 import { ChallengesContext } from './common/ChallengesContext';
@@ -10,6 +10,7 @@ import ChallengeLists from './components/ChallengeLists';
 import ChallengeFrequency from './components/ChallengeFrequency';
 import { theme } from './layout/Theme';
 import Button from './layout/Button';
+import Calendar from './pages/Calendar';
 
 const gap = props => props.theme.gapSize;
 
@@ -37,7 +38,7 @@ const AppNav = styled.nav`
 const Line = styled.span`
   width: 100%;
   margin-top: 1rem;
-  border-bottom: 0.15rem solid ${props => props.theme.lightGreen};
+  border-bottom: 0.15rem solid ${props => props.theme.green};
 `;
 
 const Logo = styled.h1`
@@ -129,6 +130,7 @@ function App() {
               )}
             />
             <Route exact path='/plan' component={Plan} />
+            <Route exact path='/calendar' component={Calendar} />
           </Switch>
         </AppWrapper>
       </ThemeProvider>

@@ -12,40 +12,27 @@ const HiddenButtonRadio = styled.input.attrs({
   height: 1px;
   margin: -1px;
   padding: 0;
-  white-space: nowrap;
   border: 0;
+  white-space: nowrap;
   overflow: hidden;
 `;
 
 const RadioButtonText = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
   height: 7rem;
   width: 7rem;
   border: 0.1 solid ${theme.gray};
-  border-radius: 50%;
   text-transform: capitalize;
 `;
 
-const RadioButtonLabel = styled.label`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
+const RadioButtonLabel = styled.label`  
   height: 9rem;
   width: 9rem;
   margin: 0 1.5rem 0;
   border: 0.075rem solid ${theme.gray};
-  border-radius: 50%;
-  cursor: pointer;
 
   ${HiddenButtonRadio} + ${RadioButtonText} {
     border: 0.1rem solid ${theme.gray};
-    color: var(--gray)
+    color: ${theme.gray}
   }
   ${HiddenButtonRadio}:checked + ${RadioButtonText} {
     border: 0.1rem solid ${theme.green};
@@ -55,15 +42,24 @@ const RadioButtonLabel = styled.label`
   }
 `;
 
+const customStyles = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+  borderRadius: '50%',
+  cursor: 'pointer'
+};
+
 const RadioButton = ({ value, id, checked, onChange }) => (
-  <RadioButtonLabel htmlFor={id}>
+  <RadioButtonLabel htmlFor={id} style={customStyles}>
     <HiddenButtonRadio
       id={id}
       value={value}
       checked={checked}
       onChange={onChange}
     />
-    <RadioButtonText>{value}</RadioButtonText>
+    <RadioButtonText style={customStyles}>{value}</RadioButtonText>
   </RadioButtonLabel>
 );
 export default RadioButton;
