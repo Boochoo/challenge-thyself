@@ -3,27 +3,28 @@ import styled from 'styled-components';
 import { theme } from './Theme';
 
 const ButtonElement = styled.button.attrs({
-  className: 'btn btn-default'
+  className: ''
 })`
-  text-align: left;
-  font-size: 2rem;
-
   margin: 0.75rem;
-  text-align: center;
-  padding: 1.5rem;
-  outline: 0;
+  font-size: 2rem;
   border: none;
-  font-family: inherit;
+  outline: 0;
+  padding: 1.5rem;
   border-radius: 0.1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: ${theme.white};
-  box-shadow: 0 0 0.25rem rgba(23, 34, 23, 2);
-  cursor: pointer;
   background-color: ${theme.darkBlue};
-
-  cursor: pointer;
+  color: ${theme.white};
+  font-family: inherit;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
   box-shadow: 0 0 0.25rem rgba(23, 34, 23, 2);
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${theme.green};
+    color: ${theme.black};
+    transition: all 400ms ease-in-out;
+  }
 `;
 
 const Button = ({ text }) => {

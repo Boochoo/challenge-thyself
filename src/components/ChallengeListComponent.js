@@ -9,15 +9,15 @@ const CheckboxWrapper = styled.div`
 `;
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  position: absolute;
   border: 0;
   opacity: 0;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
   width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const StyledCheckbox = styled.div`
@@ -76,5 +76,3 @@ ChallengeListComponent.protoType = {
 };
 
 export default ChallengeListComponent;
-
-// <input type='checkbox' onChange={onChange} checked={state} />;
